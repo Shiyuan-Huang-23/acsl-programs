@@ -13,3 +13,7 @@
             Go right to another place until a lower symbol is reached
     SINGLE INTEGERS ARE NEVER ENCLOSED!
 */
+public class Enclosure {
+    public static void main(String[] args) {
+    }    
+}    
