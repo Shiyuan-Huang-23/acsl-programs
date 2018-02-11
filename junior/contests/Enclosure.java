@@ -55,6 +55,9 @@ Assume ) is missing
     Other case: {([]}
         {32*410+(8/4*[2+34]/23}
         "13" {32*410+(8/4)*[2+34]/23}
+        
+Edge case: {302-343}+(34-3)+[349-334
+Edge case: 39393-30]+{39-20+(203-20)}
 */
 public class Enclosure {
     public static void main(String[] args) {
