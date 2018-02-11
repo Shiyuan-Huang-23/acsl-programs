@@ -12,6 +12,23 @@
             Record index in ArrayList
             Go right to another place until a lower symbol is reached
     SINGLE INTEGERS ARE NEVER ENCLOSED!
+   
+Assume { is missing
+    Normal case: [()]}
+        60+[15*(520-505)]/5-23}
+            "1" {60+[15*(520-505)]/5-23}
+            "4" 60+{[15*(520-505)]/5-23}
+            "19" 60+[15*(520-505)]/{5-23}
+    Other case: }[()]
+        60+70+6}*[5-4*(3+3)]
+        "1" {60+70+6}*[5-4*(3+3)]
+        "4" 60+{70+6}*[5-4*(3+3)]
+        
+Assume } is missing
+Assume [ is missing
+Assume ] is missing
+Assume ( is missing
+Assume ) is missing
 */
 public class Enclosure {
     public static void main(String[] args) {
