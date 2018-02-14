@@ -1,4 +1,5 @@
-NEED TO DEBUG SO THAT IT WORKS WITH ALL THREE TYPES OF ENCLOSURES
+IT APPEARS THAT THE CODE WORKS
+NEED TO RETEST
 
 determine which symbol is missing
     determine if it's a left or right
