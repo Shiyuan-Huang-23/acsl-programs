@@ -1,3 +1,5 @@
+NEED TO DEBUG SO THAT IT WORKS WITH ALL THREE TYPES OF ENCLOSURES
+
 determine which symbol is missing
     determine if it's a left or right
     if right
