@@ -1,6 +1,9 @@
 import java.util.*;
 
 public class Enclosure {
+
+    public static final String[] operations = {"+", "-", "*", "/"};
+
     public static void main(String[] args) {
         for(int i = 0; i < 1; i++) {
             ArrayList<String> enclosuresList = new ArrayList<String>(Arrays.asList("{", "[", "(", ")", "]", "}"));
