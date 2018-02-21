@@ -37,7 +37,14 @@ public class Enclosure {
                     missingSymbolIndex = j;
                 }
             }
-            System.out.println(missingSymbol);
+            ArrayList<String> possibleIndices = new ArrayList<String>();
+
+            if missingSymbolIndex < (enclosures.length / 2) {
+                int startIndex = enclosureIndices[enclosures.length - missingSymbolIndex - 1];
+                int endIndex = -1;
+            } else {
+
+            }
         }
     }
 }
