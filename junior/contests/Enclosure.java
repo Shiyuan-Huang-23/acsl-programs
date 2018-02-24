@@ -39,7 +39,7 @@ public class Enclosure {
             }
             ArrayList<String> possibleIndices = new ArrayList<String>();
 
-            if missingSymbolIndex < (enclosures.length / 2) {
+            if(missingSymbolIndex < (enclosures.length / 2)) {
                 int startIndex = enclosureIndices[enclosures.length - missingSymbolIndex - 1];
                 int endIndex = -1;
                 int oppositeIndex = startIndex;
@@ -54,6 +54,14 @@ public class Enclosure {
                         }
                     }
                 }
+                ArrayList<Integer> operationsList = new ArrayList<Integer>();
+                String[] expressionArr = expression.split("");
+                for(int j = startIndex; j > endIndex; j--) {
+                    if(Arrays.asList(operations).contains(expressionArr[j])) {
+                        operationsList.add(j);
+                    }
+                }
+                System.out.println(operationsList);
             } else {
 
             }
