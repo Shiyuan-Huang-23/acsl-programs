@@ -42,6 +42,18 @@ public class Enclosure {
             if missingSymbolIndex < (enclosures.length / 2) {
                 int startIndex = enclosureIndices[enclosures.length - missingSymbolIndex - 1];
                 int endIndex = -1;
+                int oppositeIndex = startIndex;
+                for(int j = 0; j < enclosureIndices.length / 2; j++) {
+                    if(j != missingSymbolIndex) {
+                        int leftEncloseIndex = enclosureIndices[j];
+                        int rightEncloseIndex = enclosureIndices[enclosureIndices.length - j - 1];
+                        if(oppositeIndex > leftEncloseIndex && oppositeIndex < rightEncloseIndex) {
+                            if(leftEncloseIndex > endIndex) {
+                                endIndex = leftEncloseIndex;
+                            }
+                        }
+                    }
+                }
             } else {
 
             }
