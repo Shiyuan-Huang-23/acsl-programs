@@ -54,3 +54,6 @@ Walking into corner
 (8, 5)
 
 */
+
+// given an array of 8 hexadecimal values, converts each value to octal and fills in the array with the values
+// it is given that there will be no 0s in the converted octal values
