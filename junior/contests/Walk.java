@@ -58,20 +58,28 @@ Walking into corner
 // given an array of 8 hexadecimal values, converts each value to octal and fills in the array with the values
 // it is given that there will be no 0s in the converted octal values
 
-public static void print2D(int[][] a) {
-    for(int[] row : a) {
-        for(int cell : row) {
-            System.out.print(cell + " ");
-        }
-        System.out.println();
-    }
-}
+import java.util.*;
 
-public static void print2D(String[][] a) {
-    for(String[] row : a) {
-        for(String cell : row) {
-            System.out.print(cell + " ");
+public class Walk {
+    public static int[][] board;
+    public static int rowCoord;
+    public static int colCoord;
+    
+    public static void print2D(int[][] a) {
+        for(int[] row : a) {
+            for(int cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
         }
-        System.out.println();
     }
-}
+
+    public static void print2D(String[][] a) {
+        for(String[] row : a) {
+            for(String cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+    }
+}    
