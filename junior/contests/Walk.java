@@ -55,15 +55,24 @@ Walking into corner
 
 */
 
-// given an array of 8 hexadecimal values, converts each value to octal and fills in the array with the values
-// it is given that there will be no 0s in the converted octal values
-
 import java.util.*;
 
 public class Walk {
     public static int[][] board;
     public static int rowCoord;
     public static int colCoord;
+    
+    // given an array of 8 hexadecimal values, converts each value to octal and fills in the array with the values
+    // it is given that there will be no 0s in the converted octal values
+    public static void makeBoard(String[] hexValues) {
+        for(int i = 0; i < hexValues.length; i++) {
+            int decimalValue = Integer.parseInt(hexValues[i], 16);
+            char[] octalValues = Integer.toOctalString(decimalValue).toCharArray();
+            for(int j = 0; j < octalValues.length; j++) {
+                board[7 - i][j] = octalValues[j] - 48;
+            }
+        }
+    }
     
     public static void print2D(int[][] a) {
         for(int[] row : a) {
