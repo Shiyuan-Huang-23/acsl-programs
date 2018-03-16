@@ -62,6 +62,58 @@ public class Walk {
     public static int rowCoord;
     public static int colCoord;
     
+    public static String[][] makeCoordArray(int row, int col) {
+        String[][] coordArray = new String[3][3];
+        coordArray[0][0] = (row + 1) + "," + (col - 1) + " BR";
+        coordArray[0][1] = (row + 1) + "," + col + " B";
+        coordArray[0][2] = (row + 1) + "," + (col + 1) + " BL";
+        coordArray[1][0] = row + "," + (col - 1) + " R";
+        coordArray[1][1] = row + "," + col;
+        coordArray[1][2] = row + "," + (col + 1) + " L";
+        coordArray[2][0] = (row - 1) + "," + (col - 1) + " AR";
+        coordArray[2][1] = (row - 1) + "," + col + " A";
+        coordArray[2][2] = (row - 1) + "," + (col + 1) + " AL";
+        return coordArray;
+    }
+
+    public static int[][] letterToDirArray(String d) {
+        int[][] dirArray = null;
+        if(d.equals("R")) {
+            dirArray = rotate45(0);
+        } else if(d.equals("AR")) {
+            dirArray = rotate45(1);
+        } else if(d.equals("A")) {
+            dirArray = rotate45(2);
+        } else if(d.equals("AL")) {
+            dirArray = rotate45(3);
+        } else if(d.equals("L")) {
+            dirArray = rotate45(4);
+        } else if(d.equals("BL")) {
+            dirArray = rotate45(5);
+        } else if(d.equals("B")) {
+            dirArray = rotate45(6);
+        } else if(d.equals("BR")) {
+            dirArray = rotate45(7);
+        }
+        return dirArray;
+    }
+
+    public static int[][] rotate45(int times) {
+        int[][] eightDir = new int[][] {{225, 270, 315}, {180, -1, 0}, {135, 90, 45}};
+        for(int i = 0; i < times; i++) {
+            int temp = eightDir[1][2];
+            eightDir[1][2] = eightDir[2][2];
+            eightDir[2][2] = eightDir[2][1];
+            eightDir[2][1] = eightDir[2][0];
+            eightDir[2][0] = eightDir[1][0];
+            eightDir[1][0] = eightDir[0][0];
+            eightDir[0][0] = eightDir[0][1];
+            eightDir[0][1] = eightDir[0][2];
+            eightDir[0][2] = temp;
+        }
+        return eightDir;
+    }
+    
     // given an array of 8 hexadecimal values, converts each value to octal and fills in the array with the values
     // it is given that there will be no 0s in the converted octal values
     public static void makeBoard(String[] hexValues) {
