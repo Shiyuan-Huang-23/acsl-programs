@@ -58,10 +58,66 @@ Walking into corner
 import java.util.*;
 
 public class Walk {
+
     public static int[][] board;
     public static int rowCoord;
     public static int colCoord;
-    
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        for(int i = 0; i < 6; i++) {
+            if(i == 0) {
+                System.out.print("Enter hexadecimal values, separated by a comma and a space: ");
+                String[] hexValues = in.nextLine().split(", ");
+                board = new int[8][8];
+                makeBoard(hexValues);
+            } else {
+                System.out.print("Enter row, col, direction, and number of moves, separated by a comma and a space: ");
+                String[] inputArr = in.nextLine().split(", ");
+                rowCoord = 0;
+                colCoord = 0;
+                move(Integer.parseInt(inputArr[0]), Integer.parseInt(inputArr[1]), inputArr[2], Integer.parseInt(inputArr[3]));
+                System.out.println(rowCoord + ", " + colCoord);
+            }
+        }
+    }
+
+    public static void move(int row, int col, String dirLetter, int movesLeft) {
+        // ensures coordinates are valid
+        if(row == 0) {
+            row = 8;
+        } else if(row == 9) {
+            row = 1;
+        }
+        if(col == 0) {
+            col = 8;
+        } else if(col == 9) {
+            col = 1;
+        }
+        // return the coordinates if there are no more moves left
+        if(movesLeft == 0) {
+            rowCoord = row;
+            colCoord = col;
+        } else {
+            int[][] dirArray = letterToDirArray(dirLetter);
+            String[][] coordArray = makeCoordArray(row, col);
+            int angle = board[8 - row][col - 1] * 45;
+            String destination = "";
+            for(int i = 0; i < dirArray.length; i++) {
+                for(int j = 0; j < dirArray[i].length; j++) {
+                    if(dirArray[i][j] == angle) {
+                        destination = coordArray[i][j];
+                        break;
+                    }
+                }
+            }
+            movesLeft--;
+            String[] destArr = destination.split(" ");
+            String[] coords = destArr[0].split(",");
+            move(Integer.parseInt(coords[0]), Integer.parseInt(coords[1]), destArr[1], movesLeft);
+        }
+    }
+
     public static String[][] makeCoordArray(int row, int col) {
         String[][] coordArray = new String[3][3];
         coordArray[0][0] = (row + 1) + "," + (col - 1) + " BR";
@@ -113,7 +169,7 @@ public class Walk {
         }
         return eightDir;
     }
-    
+
     // given an array of 8 hexadecimal values, converts each value to octal and fills in the array with the values
     // it is given that there will be no 0s in the converted octal values
     public static void makeBoard(String[] hexValues) {
@@ -125,7 +181,7 @@ public class Walk {
             }
         }
     }
-    
+
     public static void print2D(int[][] a) {
         for(int[] row : a) {
             for(int cell : row) {
@@ -143,4 +199,4 @@ public class Walk {
             System.out.println();
         }
     }
-}    
+}
