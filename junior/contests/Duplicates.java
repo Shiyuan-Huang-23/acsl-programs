@@ -8,5 +8,12 @@ the quick brown fox jumped over the lazy river
 _____a!b#@r$aca%da^bra&ca*bo(b)----
 abcdefghijklmnopqrstuvwxyz
 aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
-
 */
+
+import java.util.*;
+
+public class Duplicates {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+    }
+}
