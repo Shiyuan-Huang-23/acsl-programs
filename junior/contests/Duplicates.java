@@ -16,4 +16,7 @@ public class Duplicates {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
     }
+    
+    public static class Node {
+    }
 }
