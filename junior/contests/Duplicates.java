@@ -18,5 +18,16 @@ public class Duplicates {
     }
     
     public static class Node {
+        char letter;
+        int counter;
+        Node leftChild;
+        Node rightChild;
+
+        public Node(char l) {
+            letter = l;
+            counter = 1;
+            leftChild = null;
+            rightChild = null;
+        }
     }
 }
