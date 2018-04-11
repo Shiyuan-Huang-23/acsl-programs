@@ -30,20 +30,4 @@ public class Duplicates {
             rightChild = null;
         }
     }
-    
-    public void insert(Node other) {
-        if(this.letter >= other.letter) {
-            if(leftChild == null) {
-                leftChild = other;
-            } else {
-                leftChild.insert(other);
-            }
-        } else {
-            if(rightChild == null) {
-                rightChild = other;
-            } else {
-                rightChild.insert(other);
-            }
-        }
-    }
 }
