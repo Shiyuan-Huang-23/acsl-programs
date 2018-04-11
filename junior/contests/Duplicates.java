@@ -29,5 +29,17 @@ public class Duplicates {
             leftChild = null;
             rightChild = null;
         }
+        
+        public void print() {
+            System.out.println(letter + " has a count of: " + counter);
+            if(leftChild != null) {
+                System.out.println(letter + " has a left child of " + leftChild.letter);
+                leftChild.print();
+            }
+            if(rightChild != null) {
+                System.out.println(letter + " has a right child of " + rightChild.letter);
+                rightChild.print();
+            }
+        }
     }
 }
