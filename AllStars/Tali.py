@@ -1,5 +1,5 @@
 def main():
-    for i in range(1):
+    for i in range(10):
         rank = [{'1': 1, '3': 1, '4': 1, '6': 1}, {'6': 4}, {'6': 3, '4': 1}, {'6': 3, '3': 1}, {'6': 2, '4': 2}, {'6': 3, '1': 1}, {'6': 2, '4': 1, '3': 1}, {'6': 2, '3': 2}, {'6': 2, '4': 1, '1': 1}, {'6': 2, '3': 1, '1': 1}]
         arr = input(). split(", ")
         rankArr = [0] * 4
@@ -23,34 +23,23 @@ def main():
                 rankArr[a] = [24 - sum(temp) + 11, rankLetters[a]]
         rankArr.sort()
 
-        while True:
-            changed = False
-            for a in range(len(rankArr)):
-                for b in range(len(rankArr)):
-                    if a != b and rankArr[a][0] == rankArr[b][0]:
-                        if highest(arr[a]) >  highest(arr[b]):
-                            if b < a:
-                                temp = rankArr[a]
-                                rankArr[a] = rankArr[b]
-                                rankArr[b] = temp
-                                changed = True
-                                print(rankArr)
-                                break
-                        elif highest(arr[b]) > highest(arr[a]):
-                            if b > a:
-                                temp = rankArr[a]
-                                rankArr[a] = rankArr[b]
-                                rankArr[b] = temp
-                                changed = True
-                                print(rankArr)
-                                break
-                if changed:
-                    break
-            if not changed:
-                break
+        for a in range(len(rankArr)):
+            for b in range(len(rankArr)):
+                if a != b and rankArr[a][0] == rankArr[b][0]:
+                    if highest(arr[rankLetters.index(rankArr[a][1])]) >  highest(arr[rankLetters.index(rankArr[b][1])]):
+                        if b < a:
+                            temp = rankArr[a]
+                            rankArr[a] = rankArr[b]
+                            rankArr[b] = temp
+                    elif highest(arr[rankLetters.index(rankArr[b][1])]) > highest(arr[rankLetters.index(rankArr[a][1])]):
+                        if b > a:
+                            temp = rankArr[a]
+                            rankArr[a] = rankArr[b]
+                            rankArr[b] = temp
+
         for a in rankArr:
             print(a[1], end = "")
-        print(rankArr)
+        print()
 
 def highest(num):
     numList = list(num)
@@ -61,3 +50,24 @@ def highest(num):
 if __name__ == "__main__": main()
 
 # 6466, 6661, 4144, 4113
+
+# 1643, 6663, 6643, 6631
+# ABCD
+# 6666, 4366, 3144, 1111
+# ABCD
+# 3166, 3366, 4646, 6646
+# DCBA
+# 1414, 1134, 1311, 4366
+# DABC
+# 1343, 4144, 1616, 3131
+# CBAD
+# 1166, 3434, 3333, 3144
+# ABDC
+# 3133, 1414, 4444, 3434
+# CDBA
+# 1441, 6611, 4141, 1144
+# BACD
+# 4666, 6466, 6643, 6664
+# ABDC
+# 1414, 3133, 4411, 1333
+# ACBD
