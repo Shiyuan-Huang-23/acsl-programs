@@ -1,73 +1,75 @@
 def main():
-    for i in range(2):
-        arr = input().split(", ")
-        for j in range(len(arr)):
-            arr[j] = int(arr[j])
-        barr = arr[0:]
-        bins = [[0]]
-        for n in arr:
-            found = False
-            for i in range(len(bins)):
-                if bins[i][0] + n <= 10:
-                    bins[i][0] += n
-                    found = True
-                    break
-            if not found:
-                bins.append([n])
-        printBins(bins)
-        bins = [[0]]
-        arr.sort()
-        for n in arr:
-            found = False
-            for i in range(len(bins)):
-                if bins[i][0] + n <= 10:
-                    bins[i][0] += n
-                    found = True
-                    break
-            if not found:
-                bins.append([n])
-        printBins(bins)
-        bins = [[0]]
-        arr.sort(reverse = True)
-        for n in arr:
-            found = False
-            for i in range(len(bins)):
-                if bins[i][0] + n <= 10:
-                    bins[i][0] += n
-                    found = True
-                    break
-            if not found:
-                bins.append([n])
-        printBins(bins)
-        bins = [[0]]
-        for n in barr:
-            currMax = -1
-            index = 0
-            for i in range(len(bins)):
-                if bins[i][0] + n <= 10:
-                    if bins[i][0] > currMax:
-                        index = i
-                        currMax = bins[i][0]
-            if bins[index][0] + n <= 10:
-                bins[index][0] += n
-            else:
-                bins.append([n])
-        printBins(bins)
-        bins = [[0]]
-        for n in barr:
-            currMin = 10
-            index = 0
-            for i in range(len(bins)):
-                if bins[i][0] + n <= 10:
-                    if bins[i][0] < currMin:
-                        index = i
-                        currMin = bins[i][0]
-            if bins[index][0] + n <= 10:
-                bins[index][0] += n
-            else:
-                bins.append([n])
-        printBins(bins)
-        # print(bins)
+    with open("BinPackingIn.txt") as f:
+        myList = [line.rstrip('\n') for line in f]
+        for i in range(2):
+            arr = myList[i].split(", ")
+            for j in range(len(arr)):
+                arr[j] = int(arr[j])
+            barr = arr[0:]
+            bins = [[0]]
+            for n in arr:
+                found = False
+                for i in range(len(bins)):
+                    if bins[i][0] + n <= 10:
+                        bins[i][0] += n
+                        found = True
+                        break
+                if not found:
+                    bins.append([n])
+            printBins(bins)
+            bins = [[0]]
+            arr.sort()
+            for n in arr:
+                found = False
+                for i in range(len(bins)):
+                    if bins[i][0] + n <= 10:
+                        bins[i][0] += n
+                        found = True
+                        break
+                if not found:
+                    bins.append([n])
+            printBins(bins)
+            bins = [[0]]
+            arr.sort(reverse = True)
+            for n in arr:
+                found = False
+                for i in range(len(bins)):
+                    if bins[i][0] + n <= 10:
+                        bins[i][0] += n
+                        found = True
+                        break
+                if not found:
+                    bins.append([n])
+            printBins(bins)
+            bins = [[0]]
+            for n in barr:
+                currMax = -1
+                index = 0
+                for i in range(len(bins)):
+                    if bins[i][0] + n <= 10:
+                        if bins[i][0] > currMax:
+                            index = i
+                            currMax = bins[i][0]
+                if bins[index][0] + n <= 10:
+                    bins[index][0] += n
+                else:
+                    bins.append([n])
+            printBins(bins)
+            bins = [[0]]
+            for n in barr:
+                currMin = 10
+                index = 0
+                for i in range(len(bins)):
+                    if bins[i][0] + n <= 10:
+                        if bins[i][0] < currMin:
+                            index = i
+                            currMin = bins[i][0]
+                if bins[index][0] + n <= 10:
+                    bins[index][0] += n
+                else:
+                    bins.append([n])
+            printBins(bins)
+            # print(bins)
 def printBins(bins):
     for n in range(len(bins)):
         if n != len(bins) - 1:
