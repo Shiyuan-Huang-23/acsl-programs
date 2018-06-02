@@ -85,29 +85,20 @@ def evaluate(arr):
 
 if __name__ == "__main__": main()
 
-
+# Sample Input
 # ABC#ABC$ABC&#
 # ABC#ABC$!
 # ABCD%AB!!
 # DAB!A#
 
+# Test Input
 # AB!
-# 2
 # ABC$
-# 4
 # AAA#
-# 1
 # CAAB$!
-# 4
 # ABB!CD&!
-# 8
 # ABC!ABC!#!
-# 4
 # ABB#ADD$!
-# 4
 # AAAAA%DD!!!
-# 2
 # ABC$ABD&!BCD#ABCD%$
-# 8
 # C
-# 1
