@@ -46,3 +46,10 @@ def inTable(a, table):
     return False
 
 if __name__ == "__main__": main()
+    
+# Sample Input
+# MATH#CODE#, RIDGES, 2
+# ##COMPUTER, COMPSCI, 3
+# CLO#TH#ING, BYTES, 5
+# BEAR#H#UGS, DECODE, 8
+# BIFOC#AL#S, RECURSIVE, 1
