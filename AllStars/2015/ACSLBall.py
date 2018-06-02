@@ -24,6 +24,11 @@ def main():
         teamScores = [sumScores(teamXScores), sumScores(teamYScores)]
         teamScores.sort(reverse = True)
         print(str(teamScores[0]) + ", " + str(teamScores[1]))
+        print(minScorer(playerScores))
+        print(highestPer(teamXScores, True))
+        print(highestPer(teamYScores, False))
+        print(highestZone(playerScores, 2))
+        print(highestZone(playerScores, 1))
         # print(teamXScores)
         # print(teamYScores)
         # print(playerScores)
@@ -65,5 +70,80 @@ def highScorer(playerScores, two):
                 maxPlayer2 = i
         return maxPlayer + ", " + maxPlayer2
 
+def minScorer(playerScores):
+    minScore = 15 * 4 + 1
+    minPlayer = []
+    for i, j in playerScores.items():
+        score = 1 * j[0][0] + 2 * j[0][1] + 3 * j[0][2] + 4 * j[0][3]
+        if score < minScore:
+            minPlayer = []
+            minPlayer.append(i)
+            minScore = score
+        elif score == minScore:
+            minPlayer.append(i)
+    return ", ".join(minPlayer)
+
+def highestPer(playerScores, high):
+    highest = 0.0
+    lowest = 1.0
+    player = []
+    for i, j in playerScores.items():
+        percentage = sum(j[0]) / j[1]
+        if high:
+            if percentage > highest:
+                player = []
+                player.append(i)
+                highest = percentage
+            elif percentage == highest:
+                player.append(i)
+        else:
+            if percentage < lowest:
+                player = []
+                player.append(i)
+                lowest = percentage
+            elif percentage == lowest:
+                player.append(i)
+    return ", ".join(player)
+
+def highestZone(playerScores, zone):
+    highest = 0
+    player = []
+    for i, j in playerScores.items():
+        if zone == 2:
+            score = j[0][1]
+        elif zone == 1:
+            score = j[0][0]
+        if score > highest:
+            player = []
+            player.append(i)
+            highest = score
+        elif score == highest:
+            player.append(i)
+    return ", ".join(player)
+
 
 main()
+
+# Sample Input
+# Alex, 11006
+# Brett, 11118
+# Chuck, 01119
+# Dave, 2331D
+# Ed, 2421F
+# Fred, 10119
+# Greg, 2322E
+# Henry, 0214B
+# Ivan, 1202E
+# Jim, 2310A
+
+# Test Input
+# A, 20004
+# B, 1130B
+# C, 3141E
+# D, 1111C
+# E, 2223F
+# F, 1412B
+# G, 3222D
+# H, 5322E
+# I, 12118
+# J, 01106
