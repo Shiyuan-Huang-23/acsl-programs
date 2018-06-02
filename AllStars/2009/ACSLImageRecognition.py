@@ -66,12 +66,14 @@ def printMax(arr):
 
 main()
 
+# Sample Input
 # 4, 3, FCF
 # 6, 4, 30333F
 # 3, 4, 5A5
 # 6, 2, 03C
 # 4, 5, 60CE0
 
+# Test Input
 # 1, 4, F
 # 1, 4, 0
 # 4, 2, AB
