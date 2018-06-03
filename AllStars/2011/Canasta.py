@@ -1,7 +1,7 @@
 def main():
     hand = list()
     handStr = ""
-    for i in range(10):
+    for i in range(2):
         # handle input
         if i == 0:
             handStr = input()
@@ -155,6 +155,7 @@ def numWilds(group):
 
 if __name__ == "__main__": main()
 
+# Sample Input
 # A, 5, 9, T, K, A, 5, K, T, 5, &, 2, 2
 # 1, 6
 
@@ -168,7 +169,7 @@ if __name__ == "__main__": main()
 # 5, 6, 8, A, K, Q
 # 3, T, 9, 4
 # 4, 2, 2, 2, 2
-# 5, 8, 8, &, &, 8 needs debugging
+# 5, 8, 8, &, &, 8 This line yielded 160 instead of the "correct" answer of 180, but I believe 160 is correct
 # 5, T, 2, 2, 4, 2
 # 6, 6, 6, 6, 2, &, 2
 # 0
