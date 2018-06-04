@@ -1,5 +1,5 @@
 def main():
-    with open("TomographyIn.txt") as f:
+    with open("Tomography.txt") as f:
         inArr = [line.rstrip() for line in f]
         for i in range(len(inArr)):
             currIn = inArr[i].split(", ")
@@ -25,9 +25,33 @@ def recur(arr, rowSum, colSum):
                 if arr[j][k] == None:
                     for i in range(2):
                         arr[j][k] = i
-                        result = recur(arr, rowSum, colSum)
-                        if result != False:
-                            return result
+                        # prevents the recursion from going on for too long
+                        # breaks when the current rowSum or current colSum is greater than the target rowSum or colSum
+                        preventOverload = False
+                        for r in range(len(arr)):
+                            s = 0
+                            for c in range(len(arr[0])):
+                                if arr[r][c] == None:
+                                    s += 0
+                                else:
+                                    s += arr[r][c]
+                            if s > int(rowSum[r]):
+                                preventOverload = True
+                                break
+                        for c in range(len(arr[0])):
+                            s = 0
+                            for r in range(len(arr)):
+                                if arr[r][c] == None:
+                                    s += 0
+                                else:
+                                    s += arr[r][c]
+                            if s > int(colSum[c]):
+                                preventOverload = True
+                                break
+                        if preventOverload == False:
+                            result = recur(arr, rowSum, colSum)
+                            if result != False:
+                                return result
                     arr[j][k] = None
                     return False
     else:
@@ -57,6 +81,7 @@ def check(arr, rowSum, colSum):
 
 if __name__ == "__main__": main()
 
+# Sample Input
 # 10, 10
 # 20, 11
 # 21, 21
@@ -67,3 +92,15 @@ if __name__ == "__main__": main()
 # 111, 300
 # 2002, 2200
 # 2322, 4410
+
+# Test Input
+# 00, 00
+# 21, 12
+# 232, 313
+# 333, 333
+# 301, 121
+# 231, 312
+# 1230, 0321
+# 2310, 1023
+# 4321, 1234
+# 50000, 11111
