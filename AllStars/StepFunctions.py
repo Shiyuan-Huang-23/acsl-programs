@@ -1,4 +1,5 @@
 def main():
+    # array of letters that only give one number as input, for example x < t, x >= t, x = t
     oneX = ["A", "B", "C", "D", "I"]
     # the main problem is the x-coords
     # create a separate array that keeps track of the x-coords and their spaces away from the beginning
@@ -52,69 +53,80 @@ def main():
             # the nextmost will be the segment with only 4
             # add spaces based on how leftmost they are, + 1 extra space
             # these extra spaces should take into account the lengths of the segments on their lefts
+
+            # all x-values that need to be printed
             xVals = list()
             for seg in graph:
-                xVals.append(seg[2:])
-            print(xVals)
+                if seg[2] not in xVals:
+                    xVals.append(seg[2])
+                if len(seg) == 4:
+                    if seg[3] not in xVals:
+                        xVals.append(seg[3])
             xVals.sort()
             print(xVals)
-            currLen = 0
-            for j in range(len(xVals)):
-                temp = list()
-                for seg in graph:
-                    if seg[2:] == xVals[j]:
-                        temp.append(seg)
-                if len(temp) == 1:
-                    for seg in graph:
-                        if seg[2:] == xVals[j]:
-                            if j == 0:
-                                seg[1] = " " + seg[1]
-                            else:
-                                seg[1] = (" " * currLen) + seg[1]
-                            currLen = len(seg[1]) - 1
-                            seg.append(True)
-                else:
-                    found = False
-                    for line in temp:
-                        if "<" in line[1]:
-                            for s in graph:
-                                if s == line:
-                                    s.append(True)
-                                    print(s)
-                                    break
-                            if j == 0:
-                                seg[1] = " " + seg[1]
-                            else:
-                                seg[1] = (" " * currLen) + seg[1]
-                            currLen = len(seg[1]) - 1
-                            found = True
-                    if not found:
-                        for line in temp:
-                            if line[1] == "@":
-                                if j == 0:
-                                    seg[1] = " " + seg[1]
-                                else:
-                                    seg[1] = (" " * currLen) + seg[1]
-                                currLen = len(seg[1]) - 1
-                                found = True
-                    if not found:
-                        for line in temp:
-                            if ">" in line[1]:
-                                if j == 0:
-                                    seg[1] = " " + seg[1]
-                                else:
-                                    seg[1] = (" " * currLen) + seg[1]
-                                currLen = len(seg[1]) - 1
-                    # seg.append(True)
+
+            # first look at ones that go to the left of the x value (A, D)
+            # then do the ones directly above x-value (I)
+            # then ones to the right (B, C, E, F, G, H)
+            # make sure there are no repeats
+
+            # currLen = 0
+            # for j in range(len(xVals)):
+            #     temp = list()
+            #     for seg in graph:
+            #         if seg[2:] == xVals[j]:
+            #             temp.append(seg)
+            #     if len(temp) == 1:
+            #         for seg in graph:
+            #             if seg[2:] == xVals[j]:
+            #                 if j == 0:
+            #                     seg[1] = " " + seg[1]
+            #                 else:
+            #                     seg[1] = (" " * currLen) + seg[1]
+            #                 currLen = len(seg[1]) - 1
+            #                 seg.append(True)
+            #     else:
+            #         found = False
+            #         for line in temp:
+            #             if "<" in line[1]:
+            #                 for s in graph:
+            #                     if s == line:
+            #                         s.append(True)
+            #                         print(s)
+            #                         break
+            #                 if j == 0:
+            #                     seg[1] = " " + seg[1]
+            #                 else:
+            #                     seg[1] = (" " * currLen) + seg[1]
+            #                 currLen = len(seg[1]) - 1
+            #                 found = True
+            #         if not found:
+            #             for line in temp:
+            #                 if line[1] == "@":
+            #                     if j == 0:
+            #                         seg[1] = " " + seg[1]
+            #                     else:
+            #                         seg[1] = (" " * currLen) + seg[1]
+            #                     currLen = len(seg[1]) - 1
+            #                     found = True
+            #         if not found:
+            #             for line in temp:
+            #                 if ">" in line[1]:
+            #                     if j == 0:
+            #                         seg[1] = " " + seg[1]
+            #                     else:
+            #                         seg[1] = (" " * currLen) + seg[1]
+            #                     currLen = len(seg[1]) - 1
+            #         # seg.append(True)
 
 
-            for seg in graph:
-                # prints y-value
-                print(seg[0], end = "")
-                print(seg[1])
-            # modify this so it will print correctly even if there are multiple conditions
-            # modify this so it will not print places where there are no overlaps or no undefineds
-            print("******" + graph[0][2])
+            # for seg in graph:
+            #     # prints y-value
+            #     print(seg[0], end = "")
+            #     print(seg[1])
+            # # modify this so it will print correctly even if there are multiple conditions
+            # # modify this so it will not print places where there are no overlaps or no undefineds
+            # print("******" + graph[0][2])
 
 if __name__ == "__main__": main()
 
