@@ -69,10 +69,38 @@ def main():
             # then do the ones directly above x-value (I)
             # then ones to the right (B, C, E, F, G, H)
             # make sure there are no repeats
+            numSegSpaces = 1
+            numXSpaces = 0
+            xString = ""
             for j in range(len(xVals)):
                 xCoord = xVals[j]
                 # if this is the first x-coord, also look at left
                 if j == 0:
+                    temp = segInd(graph, xCoord, ["<***O", "<***@"])
+                    if temp != -1:
+                        graph[temp][1] = " " * numSegSpaces + graph[temp][1]
+                        numSegSpaces += (len(graph[temp][1]) - 2)
+                        numXSpaces = 6
+                        xString = " " * numXSpaces + str(xCoord)
+                temp = segInd(graph, xCoord, ["@"])
+                if temp != -1:
+                    graph[temp][1] = " " * numSegSpaces + graph[temp][1]
+                    if xCoord not in xString:
+                        xString += " " * (len(graph[temp][1]) + 1 - len(xString)) + str(xCoord)
+                temp = segInd(graph, xCoord, ["O***>", "@***>", "O***O", "@***@", "O***@", "@***O"])
+                if temp != -1:
+                    graph[temp][1] = " " * numSegSpaces + graph[temp][1]
+                    numSegSpaces += len(graph[temp][1]) - 1
+                    if xCoord not in xString:
+                        xString += " " * (len(graph[temp][1]) + 1 - len(xString)) + str(xCoord)
+            for seg in graph:
+                print(seg[0] + seg[1])
+
+            # print(graph)
+            # print(xString)
+            # print(graph[0][1])
+            # print(graph[1][1])
+            print(xString)
 
                 # look at directly above and to the right
 
