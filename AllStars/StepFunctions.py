@@ -9,7 +9,7 @@ def main():
             arr = myInput[i].split(", ")
             graph = list()
             index = 1
-            for i in range(int(arr[0])):
+            for j in range(int(arr[0])):
                 seg = list()
                 # y height
                 seg.append(arr[index])
@@ -69,6 +69,12 @@ def main():
             # then do the ones directly above x-value (I)
             # then ones to the right (B, C, E, F, G, H)
             # make sure there are no repeats
+            for j in range(len(xVals)):
+                xCoord = xVals[j]
+                # if this is the first x-coord, also look at left
+                if j == 0:
+
+                # look at directly above and to the right
 
             # currLen = 0
             # for j in range(len(xVals)):
@@ -127,6 +133,14 @@ def main():
             # # modify this so it will print correctly even if there are multiple conditions
             # # modify this so it will not print places where there are no overlaps or no undefineds
             # print("******" + graph[0][2])
+
+# returns the index of the segment that contains the correct x-coord and the correct direction, -1 if not found
+def segInd(graph, xCoord, direction):
+    for i in range(len(graph)):
+        seg = graph[i]
+        if seg[2] == xCoord and seg[1] in direction:
+            return i
+    return -1
 
 if __name__ == "__main__": main()
 
