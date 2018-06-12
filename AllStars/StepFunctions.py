@@ -96,12 +96,14 @@ def main():
                     graph[temp][1] = " " * numSegSpaces + graph[temp][1]
                     if xCoord not in xString:
                         xString += " " * (len(graph[temp][1]) + 1 - len(xString)) + str(xCoord)
-                temp = segInd(graph, xCoord, ["O***>", "@***>", "O***O", "@***@", "O***@", "@***O"], True)
+                temp = segInd(graph, xCoord, ["O***>", "@***>", "O***O", "@***@", "O***@", "@***O"], False)
                 if temp != -1:
                     graph[temp][1] = " " * numSegSpaces + graph[temp][1]
-                    numSegSpaces += len(graph[temp][1]) - 1
+                    x = numSegSpaces
+                    numSegSpaces += len(graph[temp][1]) - 1 - x
                     if xCoord not in xString:
-                        xString += " " * (len(graph[temp][1]) + 1 - len(xString)) + str(xCoord)
+                        xString += " " * (x - len(xString) + 1) + str(xCoord)
+                        # xString += (" " * (len(graph[temp][1]) + 1 - len(xString) - x)) + str(xCoord)
 
             # display graph
             for seg in graph:
@@ -130,12 +132,12 @@ if __name__ == "__main__": main()
 
 # Test Input
 # 2, 2, D, 3, 1, B, 3
-# 2, 2, F, 3, 4, 1, E, 2, 3 debug
+# 2, 2, F, 3, 4, 1, E, 2, 3
 # 2, 2, A, 4, 1, C, 4
 # 3, 3, B, 5, 2, I, 5, 1, A, 5
 # 2, 3, B, 4, 1, A, 4
-# 3, 4, E, 5, 7, 3, I, 5, 2, H, -2, 5 debug
+# 3, 4, E, 5, 7, 3, I, 5, 2, H, -2, 5
 # 3, 4, I, 4, 3, I, 3, 2, I, 2 debug
-# 3, 4, F, 5, 6, 3, H, 4, 5, 2, H, 3, 4 debug
-# 3, 4, B, 5, 3, E, 4, 5, 2, A, 4 debug
+# 3, 4, F, 5, 6, 3, H, 4, 5, 2, H, 3, 4
+# 3, 4, B, 5, 3, E, 4, 5, 2, A, 4
 # 3, 4, C, 6, 3, H, 4, 6, 2, A, 4 debug
