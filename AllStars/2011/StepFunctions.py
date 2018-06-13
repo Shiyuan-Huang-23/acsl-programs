@@ -78,6 +78,19 @@ def main():
             # then do the ones directly above x-value (I)
             # then ones to the right (B, C, E, F, G, H)
             # make sure there are no repeats
+            if len(xVals) == 0:
+                for seg in graph:
+                    if seg[2] not in xVals:
+                        xVals.append(seg[2])
+                    if len(seg) == 4:
+                        if seg[3] not in xVals:
+                            xVals.append(seg[3])
+                xVals.sort()
+                numSegSpaces = 1
+                for j in xVals:
+                    index = segInd(graph, j, ["@"], False)
+                    graph[index][1] = " " * numSegSpaces + graph[index][1]
+                    numSegSpaces += 1
             numSegSpaces = 1
             numXSpaces = 0
             xString = ""
@@ -137,7 +150,7 @@ if __name__ == "__main__": main()
 # 3, 3, B, 5, 2, I, 5, 1, A, 5
 # 2, 3, B, 4, 1, A, 4
 # 3, 4, E, 5, 7, 3, I, 5, 2, H, -2, 5
-# 3, 4, I, 4, 3, I, 3, 2, I, 2 debug
+# 3, 4, I, 4, 3, I, 3, 2, I, 2
 # 3, 4, F, 5, 6, 3, H, 4, 5, 2, H, 3, 4
 # 3, 4, B, 5, 3, E, 4, 5, 2, A, 4
-# 3, 4, C, 6, 3, H, 4, 6, 2, A, 4 debug
+# 3, 4, C, 6, 3, H, 4, 6, 2, A, 4
