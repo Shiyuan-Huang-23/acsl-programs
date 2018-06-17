@@ -6,7 +6,7 @@ def main():
         for i in range(len(myInput)):
             currInput = myInput[i].split(", ")
             for j in range(len(currInput)):
-                currInput[j] = int(currInput[j])
+                currInput[j] = float(currInput[j])
             xa = currInput[0]
             ya = currInput[1]
             xb = currInput[2]
@@ -30,14 +30,21 @@ def main():
             y = (a * ya + b * yb + c * yc) / (a + b + c)
             print("INCENTER, " + decFormat(x) + ", " + decFormat(y))
             # circumcenter
-            m1 = -(xb - xc) / (yb - yc)
+            m1 = -((xc - xb) / (yc - yb))
             b1 = ((yb + yc) / 2) - (m1 * ((xb + xc) / 2))
-            mx = -(xb - xa) / (yb - ya)
+            m2 = -((xb - xa) / (yb - ya))
             b2 = ((ya + yb) / 2) - (m2 * ((xa + xb) / 2))
             x = (b2 - b1) / (m1 - m2)
             y = ((m2 * b1) - (m1 * b2)) / (m2 - m1)
             print("CIRCUMCENTER, " + decFormat(x) + ", " + decFormat(y))
             # orthocenter
+            m1 = -((xc - xb) / (yc - yb))
+            b1 = ya - (m1 * xa)
+            m2 = -((xb - xa) / (yb - ya))
+            b2 = yc - (m2 * xc)
+            x = (b2 - b1) / (m1 - m2)
+            y = ((m2 * b1) - (m1 * b2)) / (m2 - m1)
+            print("ORTHOCENTER, " + decFormat(x) + ", " + decFormat(y))
             # area
             s = (a + b + c) / 2
             area = math.sqrt(s * (s - a) * (s - b) * (s - c))
@@ -47,3 +54,10 @@ def decFormat(x):
     return "{0:.2f}".format(x)
 
 main()
+
+# Sample Input
+# -2, 4, 4, 2, 0, -6
+
+# Test Input
+# -2, 7, 7, 4, 1, -2
+# -4, 0, 4, 0, 0, 6.93
