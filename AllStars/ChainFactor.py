@@ -10,18 +10,31 @@ def main():
                 if i == 0:
                     if currInput[j] != "0":
                         for c in range(len(currInput[j])):
-                            grid[6 - c][j] = currInput[j][c]
+                            grid[6 - c][j] = int(currInput[j][c])
                 elif i == 1:
                     grid = placeDisk(grid, currInput[j])
-
-            for row in grid:
-                print(row)
+                    for row in grid:
+                        print(row)
 
 def placeDisk(grid, coords):
     c = ord(coords[0]) - 65
     for r in range(6, -1, -1):
         if grid[r][c] == 0:
             grid[r][c] = int(coords[1])
+            height = 7 - r
+            horizontal = 1
+            for i in range(c - 1, -1, -1):
+                if grid[r][i] != 0:
+                    horizontal += 1
+                else:
+                    break
+            for i in range(c + 1, 7, 1):
+                if grid[r][i] != 0:
+                    horizontal += 1
+                else:
+                    break
+            print("Height: " + str(height))
+            print("Horizontal: " + str(horizontal))
             return grid
 
 main()
