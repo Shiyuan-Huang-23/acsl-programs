@@ -67,6 +67,10 @@ def applyRules(grid, counter):
                         else:
                             break
                     print("Height: " + str(height))
+                    if height == grid[r][c][0]:
+                        for i in range(6, r - 1, -1):
+                            if grid[i][c] == grid[r][c][0]:
+                                grid[i][c] = [grid[i][c], "del"]
                     print("Horizontal: " + str(horizontal + horizontalLeft + horizontalRight))
                     return [grid, counter]
             except:
