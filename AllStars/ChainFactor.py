@@ -23,26 +23,13 @@ def main():
                     print("Applied Rules")
                     for row in grid:
                         print(row)
+                    print("Disks Deleted: " + str(counter))
 
 def placeDisk(grid, c, num):
     for r in range(6, -1, -1):
         if grid[r][c] == 0:
             grid[r][c] = [num, "dr"] # "d" means this disk was dropped
-            # height = 7 - r
-            # horizontal = 1
             break
-    # for i in range(c - 1, -1, -1):
-    #     if grid[r][i] != 0:
-    #         horizontal += 1
-    #     else:
-    #         break
-    # for i in range(c + 1, 7, 1):
-    #     if grid[r][i] != 0:
-    #         horizontal += 1
-    #     else:
-    #         break
-    # print("Height: " + str(height))
-    # print("Horizontal: " + str(horizontal))
     return grid
 
 def applyRules(grid, counter):
@@ -66,20 +53,48 @@ def applyRules(grid, counter):
                             horizontalRight += 1
                         else:
                             break
+                    delDisk = False
                     print("Height: " + str(height))
+                    # if height matches disk number, delete all disks of that number vertically
                     if height == grid[r][c][0]:
+                        delDisk = True
                         for i in range(6, r - 1, -1):
                             if grid[i][c] == grid[r][c][0]:
-                                grid[i][c] = [grid[i][c], "del"]
+                                grid[i][c] = 0
+                                counter[0] += 1
                     print("Horizontal: " + str(horizontal + horizontalLeft + horizontalRight))
+                    # if width matches disk number, delete all disks of that number horizontally
+                    if horizontal + horizontalLeft + horizontalRight == grid[r][c][0]:
+                        delDisk = True
+                        for i in range(c - horizontalLeft, c + horizontalRight + 1, 1):
+                            if grid[r][i] == grid[r][c][0]:
+                                grid[r][i] = 0
+                                counter[0] += 1
+                    # delete the original dropped disk
+                    if delDisk:
+                        grid[r][c] = 0
+                        counter[0] += 1
+                    # move disks downward if there is a space under them, marking them as dropped
+                    dropped = False
+                    for r in range(5, -1, -1):
+                        for c in range(0, 7, 1):
+                            if grid[r][c] != 0 and grid[r + 1][c] == 0:
+                                dropped = True
+                                temp = r + 1
+                                while temp < 7 and grid[temp][c] == 0:
+                                    temp += 1
+                                grid[temp - 1][c] = [grid[r][c], "dr"]
+                                grid[r][c] = 0
+                    # if any disks have been dropped, reapply rules
+                    if dropped:
+                        result = applyRules(grid, counter)
+                        grid = result[0]
+                        counter = result[1]
                     return [grid, counter]
             except:
                 continue
     return [grid, counter]
 
-
-# if a row or column matches, mark like-numbered disks for deletion
-# delete disks starting from bottom row and going up to top row and increment delDisks counter
 # mark disks as dropped from bottom to top, moving them downward as much as possible during the looping
 # once all disks have been moved to the right location, continue to apply drop rules until there are no more drops
 
