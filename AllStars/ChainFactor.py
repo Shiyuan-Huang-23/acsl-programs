@@ -13,17 +13,17 @@ def main():
                             grid[6 - c][j] = int(currInput[j][c])
                 elif i == 1:
                     grid = placeDisk(grid, ord(currInput[j][0]) - 65, int(currInput[j][1]))
-                    print("Placed Disks")
-                    for row in grid:
-                        print(row)
+                    # print("Placed Disks")
+                    # for row in grid:
+                    #     print(row)
                     counter = [0]
                     result = applyRules(grid, counter)
                     grid = result[0]
                     counter = result[1]
-                    print("Applied Rules")
-                    for row in grid:
-                        print(row)
-                    print("Disks Deleted: " + str(counter))
+                    # print("Applied Rules")
+                    # for row in grid:
+                    #     print(row)
+                    print(counter[0])
 
 def placeDisk(grid, c, num):
     for r in range(6, -1, -1):
@@ -54,7 +54,7 @@ def applyRules(grid, counter):
                         else:
                             break
                     delDisk = False
-                    print("Height: " + str(height))
+                    # print("Height: " + str(height))
                     # if height matches disk number, delete all disks of that number vertically
                     if height == grid[r][c][0]:
                         delDisk = True
@@ -62,7 +62,7 @@ def applyRules(grid, counter):
                             if grid[i][c] == grid[r][c][0]:
                                 grid[i][c] = 0
                                 counter[0] += 1
-                    print("Horizontal: " + str(horizontal + horizontalLeft + horizontalRight))
+                    # print("Horizontal: " + str(horizontal + horizontalLeft + horizontalRight))
                     # if width matches disk number, delete all disks of that number horizontally
                     if horizontal + horizontalLeft + horizontalRight == grid[r][c][0]:
                         delDisk = True
@@ -74,6 +74,8 @@ def applyRules(grid, counter):
                     if delDisk:
                         grid[r][c] = 0
                         counter[0] += 1
+                    else:
+                        grid[r][c] = grid[r][c][0]
                     # move disks downward if there is a space under them, marking them as dropped
                     dropped = False
                     for r in range(5, -1, -1):
@@ -99,5 +101,11 @@ def applyRules(grid, counter):
 # once all disks have been moved to the right location, continue to apply drop rules until there are no more drops
 
 main()
+
+# Sample Input
 # 436, 454, 2, 0, 67, 0, 0
 # C3, B4, A3, A1, D5, B2, B2, A4, B5, D5
+
+# Test Input
+# 35, 447, 3462, 565, 0, 0, 0
+# A3, A4, A4, E5, D2, A4, E4, E5, F5, C2
