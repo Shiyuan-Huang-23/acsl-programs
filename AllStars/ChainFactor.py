@@ -109,3 +109,4 @@ main()
 # Test Input
 # 35, 447, 3462, 565, 0, 0, 0
 # A3, A4, A4, E5, D2, A4, E4, E5, F5, C2
+# need to debug inputs 2 and 10
