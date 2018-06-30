@@ -16,6 +16,7 @@ def main():
                     # print("Placed Disks")
                     # for row in grid:
                     #     print(row)
+                    # print()
                     counter = [0]
                     result = applyRules(grid, counter)
                     grid = result[0]
@@ -23,6 +24,7 @@ def main():
                     # print("Applied Rules")
                     # for row in grid:
                     #     print(row)
+                    # print()
                     print(counter[0])
 
 def placeDisk(grid, c, num):
@@ -87,7 +89,18 @@ def applyRules(grid, counter):
                                     temp += 1
                                 grid[temp - 1][c] = [grid[r][c], "dr"]
                                 grid[r][c] = 0
+                    for r in range(5, -1, -1):
+                        for c in range(0, 7, 1):
+                            try:
+                                if "dr" in grid[r][c]:
+                                    dropped = True
+                                    break
+                            except:
+                                continue
                     # if any disks have been dropped, reapply rules
+                    # for row in grid:
+                    #     print(row)
+                    # print()
                     if dropped:
                         result = applyRules(grid, counter)
                         grid = result[0]
@@ -109,4 +122,6 @@ main()
 # Test Input
 # 35, 447, 3462, 565, 0, 0, 0
 # A3, A4, A4, E5, D2, A4, E4, E5, F5, C2
+# input 2 should yield 4
+# input 10 should yield 2
 # need to debug inputs 2 and 10
