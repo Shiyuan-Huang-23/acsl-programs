@@ -10,8 +10,8 @@ def main():
                 currInput = currInput.split(", ")
                 for j in range(len(currInput)):
                     grid.append(list(currInput[len(currInput) - j - 1]))
-                # for row in grid:
-                #     print(row)
+                for row in grid:
+                    print(row)
                 # print(getCoords(grid, 3, 0))
                 # print(getAdj(grid, 4, 0))
             else:
@@ -93,3 +93,16 @@ main()
 # MONEY
 # AGE
 # DONKEY
+
+# Test Input
+# ATLATS, TSDIZO, VHATES, YLEIRN, OENLOT, CALEVS
+# HATES
+# LOTS
+# RETAILS
+# LIONS
+# STORE
+# SLATS
+# HAIR
+# COAL
+# LEADS
+# STAID
