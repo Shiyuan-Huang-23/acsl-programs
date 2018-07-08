@@ -102,3 +102,10 @@ main()
 # Axx, Qxxx, Axxx, Jx, 1H
 # xxxx, Qxx, Jxxx, xx, 1S
 # Axx, KQ, Kx, QJxxxx, 1H
+
+# Test Input
+# Axx, Qxx, AJxxx, xx, 1H
+# AKxxx, Qxx, Axxx, x, 1C
+# Axx, Jxxx, Axxx, Jx, 1H
+# Axxx, Qxx, Jxxx, Jx, 1S
+# AKQxxx, KQxx, Jx, x, 1D
