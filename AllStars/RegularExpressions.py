@@ -13,9 +13,21 @@ def main():
             print(m)
             # may need to cut down regular expression to find max number of characters that can be generated
             # use | in place of union
+            s = re.compile("(01)*|(1*0)")
+            m = s.match("10")
+        print(m)
+
 
 
 main()
+
+# Works
+# s = re.compile("1(1|0)*")
+# m = s.match("10100000111")
+
+# Does not work
+# s = re.compile("(01)*|(1*0)") # doesn't match second condition
+# m = s.match("11110")
 
 # https://docs.python.org/3.5/howto/regex.html
 
