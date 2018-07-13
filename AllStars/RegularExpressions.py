@@ -28,18 +28,51 @@ def main():
                 number += 1
             else:
                 if m != None and m.start() == 0:
-                    print(str(number) + ". No, " + str(m.end()))
+                    print(str(number) + ". No, ", end = "")
                     number += 1
+                    temp = currInput[0][:-1]
+                    index = []
+                    index.append(m.end())
+                    while len(temp) > 0:
+                        try:
+                            s = re.compile(temp)
+                            m = s.match(currInput[1])
+                            if m != None and m.start() == 0:
+                                index.append(m.end())
+                            temp = temp[:-1]
+                        except:
+                            temp = temp[:-1]
+                    s = re.compile(currInput[0])
+                    print(s)
+                    m = s.match(currInput[1])
+                    temp = currInput[1][:-1]
+                    while len(temp) > 0:
+                        m = s.match(temp)
+                        if m != None and m.start() == 0:
+                            print(m)
+                            index.append(m.end())
+                        temp = temp[:-1]
+                    print(max(index))
                 else:
                     print(str(number) + ". No, ", end = "")
                     number += 1
                     temp = currInput[0][:-1]
-                    while m == None and len(temp) > 0:
+                    index = []
+                    while len(temp) > 0:
                         s = re.compile(temp)
                         m = s.match(currInput[1])
                         if m != None and m.start() == 0:
-                            print(m.end())
+                            index.append(m.end())
                         temp = temp[:-1]
+                    s = re.compile(currInput[0])
+                    m = s.match(currInput[1])
+                    temp = currInput[1][:-1]
+                    while len(temp) > 0:
+                        m = s.match(temp)
+                        if m != None and m.start() == 0:
+                            index.append(m.end())
+                        temp = temp[:-1]
+                    print(max(index))
             # may need to cut down regular expression to find max number of characters that can be generated
             # s = re.compile("(01)*|(1*0)")
             # m = s.match("10")
