@@ -9,66 +9,69 @@ def main():
                 table[j] = [j + 1] + list(currInput[j + 1])
                 for k in range(len(table[j])):
                     table[j][k] = int(table[j][k])
-            print(str(number) + ".")
+            print(str(number) + ".", end = "")
             number += 1
-            for row in table:
-                print(row)
-            print(regex(table, False))
+            row = [0, 0]
+            print(regex(table))
 
-def regex(table, orCond):
-    result = ""
-    if not orCond:
-        for row in table:
-            state = row[0]
-            aRule = row[1]
-            bRule = row[2]
-            if aRule == state:
-                result += "a*"
-            elif bRule == state:
-                result += "b*"
-            if aRule == state + 1:
-                result += "a"
-            elif bRule == state + 1:
-                result += "b"
+def regex(table):
+    result = []
+    result.append(regexHelper(table, 1))
+    result.append(regexHelper(table, 2))
+    if result[0] == result[1]:
+        result = result[0]
     else:
-        result = ""
-        r = 0
-        for j in range(len(table)):
-            row = table[j]
-            state = row[0]
-            aRule = row[1]
-            bRule = row[2]
-            if aRule == state:
-                result += "a*"
-            elif bRule == state:
-                result += "b*"
-            if aRule == state + 1:
-                result += "a"
-            elif bRule == state + 1:
-                result += "b"
-            if aRule != state and aRule != 0 and aRule != state + 1:
-                result = [result] * 2
-                r = j
-                break
-            if bRule != state and bRule != 0 and bRule != state + 1:
-                result = [result] * 2
-                r = j
-                break
-        aRow = 0
-        bRow = 0
-        aRule = table[aRow][1]
-        bRule = table[bRow][2]
-        while aRule != 0 or bRule != 0:
-            if aRule == state:
-                result[0] += "a*"
-                if aRow == bRow:
-                    result[1] += "a*"
-            if bRule == state:
-                result[1] += "b*"
-                if aRow == bRow:
-                    result[0] += "b*"
+        result = " OR ".join(result)
 
+    return result
 
+def regexHelper(table, branch):
+    result = ""
+    finished = False
+    r = 0
+    while not finished:
+        row = table[r]
+        state = row[0]
+        for c in range(1, 3, 1):
+            rule = row[c]
+            if rule == state:
+                result += chr(c + 96) + "*"
+        branching = False
+        poss = []
+        for c in range(1, 3, 1):
+            if row[c] != 0 and row[c] != state:
+                poss.append(row[c])
+        if len(poss) == 2:
+            branching = True
+        for c in range(1, 3, 1):
+            rule = row[c]
+            if rule != state and rule != 0:
+                if branching:
+                    if c == branch:
+                        result += chr(c + 96)
+                else:
+                    result += chr(c + 96)
+        if branch == 0:
+            if r < len(table) - 1:
+                r += 1
+            else:
+                finished = True
+        else:
+            # do something if one of the rules is not a state or 0
+            # if both rules meet this criteria, use the branch to determine which to follow
+            possibilities = []
+            row = table[r]
+            for c in range(1, 3, 1):
+                if row[c] != 0 and row[c] != state:
+                    possibilities.append(row[c])
+            if len(possibilities) == 1:
+                r = possibilities[0] - 1
+            elif len(possibilities) == 2:
+                r = possibilities[branch - 1] - 1
+            else:
+                finished = True
+        if table[r][1:2] == [0, 0]:
+            finished = True
     return result
 
 main()
@@ -77,3 +80,5 @@ main()
 # 3, 20, 32, 00
 # 4, 21, 03, 40, 00
 # 4, 12, 32, 04, 00
+# 4, 24, 32, 00, 02
+# 5, 20, 43, 50, 05, 00
