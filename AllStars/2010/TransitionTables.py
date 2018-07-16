@@ -51,26 +51,19 @@ def regexHelper(table, branch):
                         result += chr(c + 96)
                 else:
                     result += chr(c + 96)
-        if branch == 0:
-            if r < len(table) - 1:
-                r += 1
-            else:
-                finished = True
+
+        # do something if one of the rules is not a state or 0
+        # if both rules meet this criteria, use the branch to determine which to follow
+        possibilities = []
+        row = table[r]
+        for c in range(1, 3, 1):
+            if row[c] != 0 and row[c] != state:
+                possibilities.append(row[c])
+        if len(possibilities) == 1:
+            r = possibilities[0] - 1
+        elif len(possibilities) == 2:
+            r = possibilities[branch - 1] - 1
         else:
-            # do something if one of the rules is not a state or 0
-            # if both rules meet this criteria, use the branch to determine which to follow
-            possibilities = []
-            row = table[r]
-            for c in range(1, 3, 1):
-                if row[c] != 0 and row[c] != state:
-                    possibilities.append(row[c])
-            if len(possibilities) == 1:
-                r = possibilities[0] - 1
-            elif len(possibilities) == 2:
-                r = possibilities[branch - 1] - 1
-            else:
-                finished = True
-        if table[r][1:2] == [0, 0]:
             finished = True
     return result
 
@@ -82,3 +75,15 @@ main()
 # 4, 12, 32, 04, 00
 # 4, 24, 32, 00, 02
 # 5, 20, 43, 50, 05, 00
+
+# Test Input
+# 3, 20, 03, 00
+# 3, 02, 30, 00
+# 3, 12, 32, 00
+# 3, 20, 32, 00
+# 4, 20, 23, 34, 00
+# 3, 32, 03, 00
+# 4, 32, 40, 43, 00
+# 4, 32, 23, 43, 00
+# 5, 25, 23, 40, 00, 04
+# 5, 20, 35, 40, 00, 45
