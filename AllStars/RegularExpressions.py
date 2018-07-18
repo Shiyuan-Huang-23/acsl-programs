@@ -5,22 +5,50 @@ def main():
             currInput = myInput[i].split(", ")
             print(match(currInput[0], currInput[1]))
 
+# can handle Kleene star, no parentheses
 def match(regex, text):
     # longest substring of the text that can be matched
     matched = ""
+    regIndex = 0
     textIndex = 0
     done = False
-    for i in range(len(regex)):
-        # no Kleene star
+    while regIndex < len(regex):
         if textIndex > len(text) - 1:
             break
-        if regex[i] == text[textIndex]:
-            matched += regex[i]
-            textIndex += 1
-            if i == len(regex) - 1:
-                done = True
-        else:
-            break
+        repeat = False
+        if regIndex < len(regex) - 1:
+            if regex[regIndex + 1] == "*":
+                repeat = True
+        print("Curr regex: " + str(regex[regIndex]))
+        print("Repeat: " + str(repeat))
+        if repeat:
+            while textIndex < len(text):
+                print("Parameter 1: " + str(regex[regIndex:regIndex + 1]))
+                print("Parameter 2: " + str(text[textIndex:]))
+                result = match(regex[regIndex:regIndex + 1], text[textIndex:])
+                print("Result of repeat: " + str(result))
+                if result == "YES" or result > 0:
+                    try:
+                        textIndex += match(regex[regIndex:regIndex + 1], text[textIndex:])
+                        matched += regex[regIndex:regIndex + 1]
+                    except:
+                        textIndex = len(text)
+                        matched = text
+                else:
+                    break
+            print("Text Index after repeating: " + str(textIndex))
+            regIndex += 2
+        if textIndex < len(text) and regIndex < len(regex):
+            if regex[regIndex] == text[textIndex]:
+                matched += regex[regIndex]
+                textIndex += 1
+                if regIndex == len(regex) - 1:
+                    done = True
+                else:
+                    regIndex += 1
+            else:
+                break
+
     if matched == text and done:
         return "YES"
     else:
