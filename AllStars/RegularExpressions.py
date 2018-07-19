@@ -5,6 +5,13 @@ def main():
             currInput = myInput[i].split(", ")
             print(match(currInput[0], currInput[1]))
 
+# split regex into sections eg ['0', '1', '1', '0*', '(01)*']
+# try to match first regex to first text
+# if not match, return false
+# if repeat, find the longest match possible, then recur using that match, then smaller matches (including 0) using a for loop
+# if match cut off first regex + matching text and call same method
+# when complete, return the array of text matches
+
 # can handle Kleene star, no parentheses
 def match(regex, text):
     # longest substring of the text that can be matched
