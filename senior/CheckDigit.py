@@ -10,12 +10,12 @@ def checkDigit(num):
         for i in range(len(numArr) - 1, -1, -1):
             numArr[i] *= factor
             factor += 1
-        num = sum(numArr) % 123
+        num = sum(numArr)
         # determine whether to continue
-        if num == 17:
+        if num % 123 == 17:
             return None
-        if num < 10:
-            return num
+        if num % 123 < 10:
+            return num % 123
 
 def findAnswer(currIn):
     # find check digits for all numbers
@@ -58,4 +58,22 @@ if __name__ == "__main__": main()
 # 1231000, 20
 # 34, 1
 
+# Sample Output
+# 5 and 9
+# 9
+# 8 and 9
+# 8
 
+# Test Input
+# 2342342, 5
+# 6565656, 1
+# 3333333, 25
+# 1234123, 8
+# 4567123, 5
+
+# Test Output
+# 3
+# 3 and 5
+# 9
+# 5 and 7 and 9
+# 8
