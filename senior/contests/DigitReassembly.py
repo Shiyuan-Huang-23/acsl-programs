@@ -1,21 +1,4 @@
-def main():
-    for i in range(5):
-        # take input
-        currIn = input("Enter the numbers: ")
-        number = currIn.split(" ")[0]
-        n = int(currIn.split(" ")[1])
-        sumArr = []
-        while len(number) >= n:
-            sumArr.append(int(number[:n]))
-            number = number[n:]
-        if len(number) > 0:
-            pad = n - len(number)
-            number += ("0" * pad)
-            sumArr.append(int(number))
-            number = ""
-        print(sum(sumArr))
-
-if __name__ == "__main__": main()
+# Upload program after contest end date: Dec 21, 2018
 
 # Sample Input
 # 13256709 3
