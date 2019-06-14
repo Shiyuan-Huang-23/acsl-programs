@@ -102,11 +102,11 @@ def checkCol(grid, colNum):
     
 # fills the grid recursively
 def fillGrid(grid):
-  for i in len(grid):
+  for i in range(len(grid)):
     if (checkRow(grid, i) and checkCol(grid, i)) == False:
       return False
   filled = True
-  for i in len(grid):
+  for i in range(len(grid)):
     if isFilled(grid[i]) == False:
       filled = False
       break
@@ -137,8 +137,16 @@ with open("as6-sample.txt") as f:
     grid = [[""] * n for j in range(n)]
     inStr = parseInput(currIn[1])
     grid = placePieces(inStr, grid)
-    # displayGrid(grid)
-
+    grid = fillGrid(grid)
+    binStr = ""
+    for j in range(len(grid)):
+      if grid[j][j] == "X":
+        binStr += "1"
+      else:
+        binStr += "0"
+    decimal = int(binStr, 2)
+    hexOutput = (hex(decimal)[2:]).upper()
+    print(hexOutput)
 
 # 6 2OX1O9X2OX1X4O8O
 # 8 2O3O2X9O2XXX3X5O3O5XX1X1X9X1X2
