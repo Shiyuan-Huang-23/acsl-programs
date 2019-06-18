@@ -93,27 +93,26 @@ def placePieces(grid, pieces):
             return rotation
         curr_done = False
         for r in range(h - 1, -1, -1):
-            if curr_done == False:
-                for c in range(w):
-                    if grid[r][c] == 0:
-                        # find bottom-most, left-most open grid location
-                        # try to place the first piece there
-                        currPiece = pieces[pieceIndex]
-                        for i in range(4):
-                            for j in range(i):
-                                currPiece = rotate(currPiece)
-                            result = place(grid, currPiece, r, c)
-                            # at any point, if there is success, place the piece and move onto the next alphabet piece, remember to start with A again
-                            if result != False:
-                                display(result)
-                                print("Successfully placed piece", pieceIndex)
-                                grid = result
-                                pieceIndex += 1
-                                rotation += i
-                                if pieceIndex == len(pieces):
-                                    pieceIndex = 0
-                                piecesSkipped = 0
-                                curr_done = True
+            for c in range(w):
+                if grid[r][c] == 0 and curr_done == False:
+                    # find bottom-most, left-most open grid location
+                    # try to place the first piece there
+                    currPiece = pieces[pieceIndex]
+                    for i in range(4):
+                        for j in range(i):
+                            currPiece = rotate(currPiece)
+                        result = place(grid, currPiece, r, c)
+                        # at any point, if there is success, place the piece and move onto the next alphabet piece, remember to start with A again
+                        if result != False:
+                            display(result)
+                            print("Successfully placed piece", pieceIndex)
+                            grid = result
+                            pieceIndex += 1
+                            rotation += i
+                            if pieceIndex == len(pieces):
+                                pieceIndex = 0
+                            piecesSkipped = 0
+                            curr_done = True
         # if there is still not success, rotate the piece and repeat the aforementioned steps
         if curr_done == False:
             pieceIndex += 1
