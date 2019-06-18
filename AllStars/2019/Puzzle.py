@@ -1,7 +1,13 @@
 # prints a 2D array
 def display(grid):
     for i in grid:
-        print(i)
+        for j in i:
+            if j == 1:
+                print(" ", end = "")
+            else:
+                print(j, end = "")
+        print()
+        #print(i)
 
 # converts from hex to binary
 def hexToBin(h):
@@ -81,42 +87,39 @@ def placePieces(grid, pieces):
     w = len(grid[0])
     h = len(grid)
     rotation = 0
-    curr_rotation = 0
     piecesSkipped = 0
     while True:
         if piecesSkipped > len(pieces):
             return rotation
         curr_done = False
-        currPiece = pieces[pieceIndex]
-        for i in range(curr_rotation):
-            currPiece = rotate(currPiece)
         for r in range(h - 1, -1, -1):
             if curr_done == False:
                 for c in range(w):
                     if grid[r][c] == 0:
                         # find bottom-most, left-most open grid location
                         # try to place the first piece there
-                        result = place(grid, currPiece, r, c)
-                        # at any point, if there is success, place the piece and move onto the next alphabet piece, remember to start with A again
-                        if result != False:
-                            # display(result)
-                            # print("Successfully placed piece", pieceIndex)
-                            grid = result
-                            pieceIndex += 1
-                            rotation += curr_rotation
-                            if pieceIndex == len(pieces):
-                                pieceIndex = 0
-                            piecesSkipped = 0
-                            curr_done = True
+                        currPiece = pieces[pieceIndex]
+                        for i in range(4):
+                            for j in range(i):
+                                currPiece = rotate(currPiece)
+                            result = place(grid, currPiece, r, c)
+                            # at any point, if there is success, place the piece and move onto the next alphabet piece, remember to start with A again
+                            if result != False:
+                                display(result)
+                                print("Successfully placed piece", pieceIndex)
+                                grid = result
+                                pieceIndex += 1
+                                rotation += i
+                                if pieceIndex == len(pieces):
+                                    pieceIndex = 0
+                                piecesSkipped = 0
+                                curr_done = True
         # if there is still not success, rotate the piece and repeat the aforementioned steps
         if curr_done == False:
-            curr_rotation += 1
-            if curr_rotation == 4:
-                pieceIndex += 1
-                if pieceIndex == len(pieces):
-                    pieceIndex = 0
-                curr_rotation = 0
-                piecesSkipped += 1
+            pieceIndex += 1
+            if pieceIndex == len(pieces):
+                pieceIndex = 0
+            piecesSkipped += 1
             # stop if you cycle through pieces A - E without being able to place any pieces, or if there are no blank pieces on the grid
 
 with open("as9-sample.txt") as f:
@@ -140,8 +143,8 @@ with open("as9-sample.txt") as f:
         # fill in grid
         for j in currIn:
             grid.append(list(map(int, list(hexToBin(list(j))))))
-        # display(grid)
-        # print()
+        display(grid)
+        print()
         # place pieces
         print(placePieces(grid, pieces))
 
