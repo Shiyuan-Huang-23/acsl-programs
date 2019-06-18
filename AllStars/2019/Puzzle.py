@@ -145,7 +145,7 @@ with open("as9-sample.txt") as f:
         display(grid)
         print()
         # place pieces
-        print(placePieces(grid, pieces))
+        print(placePieces(grid, pieces) * 90)
 
 # 8 5 0E4 EA0 AEA 017 0F9 DF DF CF EB E3 EB F8 FD
 # 8 5 720 EA0 575 170 0F9 FF FF F9 FD FD 01 A8 03
